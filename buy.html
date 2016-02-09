@@ -8,6 +8,7 @@
 	<meta name="author" content="HSboost101">
       <!-- 引入 Bootstrap -->
       <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
       <!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
       <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
@@ -20,12 +21,12 @@
    <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">HSBoost101</a>
+			<a class="navbar-brand" href="index.html">HSBoost101</a>
 		</div>
 		<div>
 		  <ul class="nav navbar-nav">
 			 <li><a href="index.html">Service</a></li>
-			 <li><a href="buy.html">Buy</a></li>
+			 <li><a href="buy.html">Price</a></li>
 			 <li><a href="faq.html">FAQ</a></li>
 			 <li><a href="contact.html">Contact</a></li>
 		  </ul>
@@ -35,7 +36,228 @@
 	<div class="feature-wrapper hidden-xs">
 		<img src="banner.png" width="100%">
 	</div>
+	
+	<br>
+	<br>
+	
+	<div class="container" align="center">
+		<form action="" method="POST">
+
+							<input name="test" style="display: none;" type="text" />
+
+							<table>
+
+								<tbody>
+
+									<tr>
+
+										<td style="font-size: 20px; text-align: center; font-weight: bold;">
+
+											<b>Select your current rank:</b>
+											<br />
+
+											<select id="start_lvl" name="start_level">
+											<option selected="selected" value="25">25</option>
+											<option value="24">24</option>
+											<option value="23">23</option>
+											<option value="22">22</option>
+											<option value="21">21</option>
+											<option value="20">20</option>
+											<option value="19">19</option>
+											<option value="18">18</option>
+											<option value="17">17</option>
+											<option value="16">16</option>
+											<option value="15">15</option>
+											<option value="14">14</option>
+											<option value="13">13</option>
+											<option value="12">12</option>
+											<option value="11">11</option>
+											<option value="10">10</option>
+											<option value="9">9</option>
+											<option value="8">8</option>
+											<option value="7">7</option>
+											<option value="6">6</option>
+											<option value="5">5</option>
+											<option value="4">4</option>
+											<option value="3">3</option>
+											<option value="2">2</option>
+											<option value="1">1</option>
+											</select>
+											<br />
+
+											<img alt="Starting rank" id="l_start_image" style="width: 120px; padding-top: 12px;" /></td>
+
+										<td style="font-size: 20px; text-align: center; vertical-align: middle; font-weight: bold;">
+
+											Price: $ <input id="price" name="price" readonly="readonly" style="width: 43px;" type="text" />
+										</td>
+
+										<td style="font-size: 20px; text-align: center; font-weight: bold;">
+
+											<b>Select your desired rank:</b><br />
+
+											<select id="end_lvl" name="end_level">
+											<option selected="selected" value="24">24</option>
+											<option value="23">23</option>
+											<option value="22">22</option>
+											<option value="21">21</option>
+											<option value="20">20</option>
+											<option value="19">19</option>
+											<option value="18">18</option>
+											<option value="17">17</option>
+											<option value="16">16</option>
+											<option value="15">15</option>
+											<option value="14">14</option>
+											<option value="13">13</option>
+											<option value="12">12</option>
+											<option value="11">11</option>
+											<option value="10">10</option>
+											<option value="9">9</option>
+											<option value="8">8</option>
+											<option value="7">7</option>
+											<option value="6">6</option>
+											<option value="5">5</option>
+											<option value="4">4</option>
+											<option value="3">3</option>
+											<option value="2">2</option>
+											<option value="1">1</option>
+											<option value="0">LEGEND</option>
+											</select><br />
+
+											<img alt="Desired rank" id="l_end_image" style="width: 120px; padding-top: 12px;" /></td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+
+						</form>
+
+		<script lang="JavaScript">
+
+
+			function calculate() {
+
+				var start_lvl, end_lvl, prices;
+
+
+
+				$('#price').val("0");
+
+
+
+				prices = {"24":0,"23":0,"22":0,"21":0,"20":1,"19":2,"18":2,"17":2,"16":2,"15":2,"14":3,"13":3,"12":3,"11":3,"10":3,"9":5,"8":5,"7":5,"6":5,"5":5,"4":12,"3":12,"2":12,"1":15,"0":20};
+
+
+
+
+
+				start_lvl = parseInt ($("select[name=start_level]").val());
+
+				end_lvl = parseInt ($("select[name=end_level]").val());	
+
+
+
+
+
+
+
+				if (start_lvl <= end_lvl) {  
+
+				  end_lvl = start_lvl-1;
+
+				  $("select[name=end_level]").val(end_lvl);
+
+				}
+
+
+
+				  $("select[name=end_level] option").each(function(indx){
+
+					if ( $(this).val()>=start_lvl) {
+
+						$(this).prop("disabled", true);
+
+					} else {
+
+						$(this).prop("disabled", false);
+
+					}
+
+				   });
+
+
+
+				
+
+				$('#l_start_image').attr('src', start_lvl + ".png");
+
+				$('#l_end_image').attr('src', end_lvl + ".png");
+
+
+
+				var price = 0;
+
+
+
+				for (var x=start_lvl-1; x>=end_lvl; x--) {
+
+				   price+=prices[x];
+
+				}
+
+
+
+
+
+				if (price) {
+
+					price = Math.ceil(price);
+
+					$('#price').val(price);
+
+				}
+
+			}
+
+
+
+			$(document).ready(function() {
+
+				$('#start_lvl').change(function() {
+
+					calculate();
+
+				});
+
+				$('#end_lvl').change(function() {
+
+					calculate();
+
+				});
+
+			
+
+				calculate();
+
+			});
+
+
+
+		</script>
 		
+		<h3>
+			
+			When you ready to pay, contact us on Skype first:<img src="skypeicon.png" width="30" height="30"></img>  <a href="skype:ticobike101?add">ticobike101(click here)</a><br>
+			We accept <img src="paypal.jpg" width="100" height="50"></img>
+		</h3>
+		<br>
+		<br>
+		<br>
+	</div>
+
+	
 <div class="footer-content" style="background-color:#555555">
 	<div class="container">
 		<div class="row">
